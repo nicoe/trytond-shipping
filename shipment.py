@@ -77,13 +77,14 @@ class Package:
         """
         Returns sum of weight associated with each move line
         """
+        package_weight = sum(p.computed_weight for p in self.children)
         weight = sum(
             map(
                 lambda move: move.get_weight(self.weight_uom, silent=True),
                 self.moves
             )
         )
-        return weight
+        return package_weight + weight
 
 
 class ShipmentOut:
